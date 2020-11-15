@@ -7,7 +7,7 @@ Requires minimum soldering skills
 
 1. Download intermediate bootloader from "bootloader" folder with speed of your choice: 
   * 38400 is slowest one and MOST reliable (upload firmware will take a bit more that 1 hour).
-  * 115200 is the best compromise between speed and reliability (upload firmware will take around 20 min).
+  * **115200** (recommended) is the best compromise between speed and reliability (upload firmware will take around 20 min).
   * 460800 is fastest one (upload firmware will take around 6 min). 
 1. Download all files from recovery firmware folder of your choice (for now the latest one is [mgl03_1.4.7_0065_mod20201110](https://github.com/serrj-sv/lumi.gateway.mgl03/tree/main/uart_recovery/mgl03_1.4.7_0065_mod20201110))
 1. Download and install [Tera Term](https://ttssh2.osdn.jp/index.html.en)
