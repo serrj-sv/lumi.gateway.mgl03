@@ -3,7 +3,7 @@ This instruction will help you to flash latest firmware 1.4.7 with telnet enable
 * No need to "swap slots"
 * No need to touch TP16/TP17 points
 
-Requires minimum soldering skills (no soldering manual is coming soon)
+Requires minimum soldering skills
 
 1. Download intermediate bootloader from "bootloader" folder with speed of your choice: 
   * 38400 is slowest one and MOST reliable (upload firmware will take a bit more that 1 hour).
