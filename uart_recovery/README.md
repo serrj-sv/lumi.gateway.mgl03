@@ -5,10 +5,10 @@ This instruction will help you to flash latest firmware 1.4.7 with telnet enable
 
 Requires minimum soldering skills (no soldering manual is coming soon)
 
-1. [Download](https://github.com/serrj-sv/lumi.gateway.mgl03/tree/main/uart_recovery/bootloader) intermediate bootloader with speed of your choice: 
+1. Download intermediate bootloader from "bootloader" folder with speed of your choice: 
   * 38400 is slowest one and MOST reliable (upload firmware will take a bit more that 1 hour).
   * 115200 is the best compromise between speed and reliability (upload firmware will take a bit more that 20 min).
-1. [Download](https://github.com/serrj-sv/lumi.gateway.mgl03/tree/main/uart_recovery) all files from recovery firmware folder of your choice (for now the latest one is [mgl03_1.4.7_0065_mod20201110](https://github.com/serrj-sv/lumi.gateway.mgl03/tree/main/uart_recovery/mgl03_1.4.7_0065_mod20201110))
+1. Download all files from recovery firmware folder of your choice (for now the latest one is [mgl03_1.4.7_0065_mod20201110](https://github.com/serrj-sv/lumi.gateway.mgl03/tree/main/uart_recovery/mgl03_1.4.7_0065_mod20201110))
 1. Download and install [Tera Term](https://ttssh2.osdn.jp/index.html.en)
 1. Pry open gateway:
 
