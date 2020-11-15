@@ -1,4 +1,4 @@
-* Based on official 1.4.7_0065
+* Based on official 1.4.7_0065, built by @zvldz
 * List of modifications:
   * enabled telnetd
   * added curl
