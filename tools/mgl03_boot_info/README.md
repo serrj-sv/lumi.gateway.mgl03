@@ -1,4 +1,4 @@
-Utility to modify boot_info partition
+Utility to modify boot_info partition  
 Can be run in linux(_x86) or on gateway itself (_rtkmipsel)
 
 MGL03 boot config tool.
