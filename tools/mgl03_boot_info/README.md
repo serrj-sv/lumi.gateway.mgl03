@@ -1,7 +1,9 @@
-Utility to modify boot_info partition
+Utility to modify boot_info partition  
 Can be run in linux(_x86) or on gateway itself (_rtkmipsel)
 
 MGL03 boot config tool.
+
+```
 Usage: ./mgl03_boot_info [-f file] show
        ./mgl03_boot_info [-f file] gen_default
        ./mgl03_boot_info [-f file] priv_mode <on|off>
@@ -16,3 +18,4 @@ Usage: ./mgl03_boot_info [-f file] show
        ./mgl03_boot_info [-f file] set_rootfs_1 <size> <chksum>
        ./mgl03_boot_info [-f file] set_vernum <value>
        ./mgl03_boot_info [-f file] set_wdog_time <value>
+```
