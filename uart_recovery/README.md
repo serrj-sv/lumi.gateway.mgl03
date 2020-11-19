@@ -1,4 +1,4 @@
-## Flash firmware to Xiaomi Gateway v3 via UART with minimal effort.
+## Flash firmware to Xiaomi Gateway v3 via UART.
 * No need to decode password
 * No need to "swap slots"
 * No need to touch TP16/TP17 points
