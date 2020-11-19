@@ -33,7 +33,7 @@
 1. Run Tera Term
 1. Choose "Serial -> COM port", OK
 1. Choose "Control -> Macro"
-1. Open .ttl file you downloaded in step [2] 
+1. Open .mgl03_uart_recovery.ttl file you downloaded in step [1] 
 1. Follow on-screen instructions
 1. Perform Factory Reset: after Gateway fully booted click on it's button 10 times repeatedly.
 
