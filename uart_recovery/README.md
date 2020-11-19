@@ -1,18 +1,10 @@
-### This instruction will help you to flash latest firmware 1.4.7 with telnet enabled with minimal effort.
+## This instruction will help you to flash latest firmware 1.4.7 with telnet enabled with minimal effort.
 * No need to decode password
 * No need to "swap slots"
 * No need to touch TP16/TP17 points
 * Requires minimum soldering skills
 
-1. Download [mgl03_uart_recovery.ttl](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/mgl03_uart_recovery.ttl)
-1. Download intermediate bootloader from [bootloader](https://github.com/serrj-sv/lumi.gateway.mgl03/tree/main/uart_recovery/bootloader) folder with speed of your choice: 
-    * [rtkboot_38400.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_115200.bin) is slowest one and MOST reliable (upload firmware will take a bit more that 1 hour).
-    * [rtkboot_57600.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_57600.bin) is a bit faster then rtkboot_38400.bin
-    * [**rtkboot_115200.bin**](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_115200.bin) (recommended) is the best compromise between speed and reliability (upload firmware will take around 20 min).
-    * [rtkboot_23400.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_57600.bin) is a bit faster then rtkboot_115200.bin
-    * [rtkboot_460800.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_460800.bin) is fastest one (upload firmware will take around 6 min). 
-1. Download mgl03_xxxxx.uart file from [firmware folder](https://github.com/serrj-sv/lumi.gateway.mgl03/tree/main/firmware) of your choice.
-1. Download and install [Tera Term](https://ttssh2.osdn.jp/index.html.en)
+### Hardware
 1. Pry open gateway:
 
    <img src=https://user-images.githubusercontent.com/511909/98269111-6da8b980-1f9e-11eb-82ef-d435a900edf1.jpg>
@@ -26,9 +18,37 @@
     * Do not feed VCC from UART to Board. Use external power supply and micro-usb cable
     * Do NOT touch any other test points (like TP16, TP17, etc), this is NOT NEEDED. 
 
+### Files
+1. Download intermediate bootloader from [bootloader](https://github.com/serrj-sv/lumi.gateway.mgl03/tree/main/uart_recovery/bootloader) folder with speed of your choice: 
+    * [rtkboot_38400.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_115200.bin) is slowest one and MOST reliable (upload firmware will take a bit more that 1 hour).
+    * [rtkboot_57600.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_57600.bin) is a bit faster then rtkboot_38400.bin
+    * [**rtkboot_115200.bin**](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_115200.bin) (recommended) is the best compromise between speed and reliability (upload firmware will take around 20 min).
+    * [rtkboot_23400.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_57600.bin) is a bit faster then rtkboot_115200.bin
+    * [rtkboot_460800.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_460800.bin) is fastest one (upload firmware will take around 6 min). 
+1. Download mgl03_xxxxx.uart file from [firmware folder](https://github.com/serrj-sv/lumi.gateway.mgl03/tree/main/firmware) of your choice.
+
+### Windows
+1. Download [mgl03_uart_recovery.ttl](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/mgl03_uart_recovery.ttl)
+1. Download and install [Tera Term](https://ttssh2.osdn.jp/index.html.en)
 1. Run Tera Term
 1. Choose "Serial -> COM port", OK
 1. Choose "Control -> Macro"
 1. Open .ttl file you downloaded in step [2] 
 1. Follow on-screen instructions
 1. Perform Factory Reset: after Gateway fully booted click on it's button 10 times repeatedly.
+
+### Linux (credit: [@CODeRUS](https://github.com/coderus))
+1. Download [mgl03_uart_recovery.expect](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/mgl03_uart_recovery.expect)
+1. make sure following programs are installed:
+  * expect
+  * sx
+  * stty
+1. make sure that bootloader (rtkboot_xxxx.bin), firmware (mgl03_xxxxxx.uart) and mgl03_uart_recovery.expect are in the same folder
+1. make sure you're in "dialout" group
+1. run:
+   ```
+   chmod +x mgl03_uart_recovery.expect
+   ./mgl03_uart_recovery.expect
+   ```
+ 1. follow on-screen instructions
+ 1. Perform Factory Reset: after Gateway fully booted click on it's button 10 times repeatedly.
