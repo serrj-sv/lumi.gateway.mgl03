@@ -43,7 +43,7 @@ regexp {rtkboot_(\d+).bin} $bootloader_file -> bootloader_speed
 puts "Selected bootloader speed: $bootloader_speed\n"
 
 
-set files [glob -directory [pwd] -tails mgl03*.bin]
+set files [glob -directory [pwd] -tails mgl03*.uart]
 puts "Available firmwares:"
 set idx 0
 array set firmwares {}
@@ -109,7 +109,6 @@ set tty_id [open $tty_dev r+]
 
 # serial port parameters
 exec stty -F $tty_dev 38400 raw -ixon -crtscts -echo -istrip -hup
-# -clocal
 
 # connect
 spawn -open $tty_id
