@@ -2,7 +2,7 @@
 * No need to decode password
 * No need to "swap slots"
 * No need to touch TP16/TP17 points
-* Requires minimum soldering skills
+* Requires minimum soldering skills (no-solder options available, see "Hardware")
 
 ### Hardware
 1. Pry open gateway:
@@ -17,6 +17,7 @@
     * UART adapter MUST be in 3.3V mode. The Gateway board is 5v intolerant.
     * Do not feed VCC from UART to Board. Use external power supply and micro-usb cable
     * Do NOT touch any other test points (like TP16, TP17, etc), this is NOT NEEDED. 
+1. If you don't feel comfortable or confident with soldering - buy "pcb pogo clip" (for example: [Aliexpress](https://www.aliexpress.com/item/4001015704531.html), choose option "2.54MM 3P Single")
 
 ### Files
 1. Download intermediate bootloader from [bootloader](https://github.com/serrj-sv/lumi.gateway.mgl03/tree/main/uart_recovery/bootloader) folder with speed of your choice: 
