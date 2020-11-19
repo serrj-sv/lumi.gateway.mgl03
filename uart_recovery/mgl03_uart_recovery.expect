@@ -184,7 +184,7 @@ send "y\r"
 puts "=== Flashing rootfs, please wait! ==="
 expect "<RealTek>"
 
-send "j 0\r"
+send "reboot\r"
 close $tty_id
 
 puts "\nGateway flash complete, device is rebooting now!"
