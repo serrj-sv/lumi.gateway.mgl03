@@ -108,7 +108,8 @@ puts "Connecting to $tty_dev\n"
 set tty_id [open $tty_dev r+]
 
 # serial port parameters
-exec stty -F $tty_dev 38400 raw -clocal -echo -istrip -hup
+exec stty -F $tty_dev 38400 raw -ixon -crtscts -echo -istrip -hup
+# -clocal
 
 # connect
 spawn -open $tty_id

@@ -1,0 +1,138 @@
+;setsync 0
+show -1
+enablekeyb 0
+setspeed 38400
+yesnobox 'Whould you like to try automatic bootloader interrupt?\n                (choose "No" if it fails for you)' 'Bootloader' 1
+if result then
+  messagebox '1. Connect Gateway to UART\n2. Disconnect Gateway from power\n3. Press OK' 'Start' 1
+  dispstr #$1B"[2J" #$1B"[H"
+  dispstr '==Power ON Gateway NOW!==' 
+  dispstr #$1B"[1E" 
+  wait 'uart ok'
+  send 'u'
+  wait '<RealTek>' 'init IP ok'
+else
+  messagebox '1. Connect Gateway to UART\n2. Disconnect Gateway from power\n3. Press OK' 'Start' 1
+  dispstr #$1B"[2J" #$1B"[H"
+  dispstr '==Pree and hold "u" on keyboard and power ON Gateway=='
+  dispstr #$1B"[1E"
+  enablekeyb 1
+  wait '<RealTek>' 'init IP ok'
+  enablekeyb 0
+  if result=1 messagebox 'Release "u" and peress OK to continue' 'Success!'
+endif
+if result=2 then
+ messagebox 'Enter bootloader failed! Switch OFF gateway and run this macro again' 'Fail'
+ end
+endif
+;setsync 1
+sendln ''
+wait '<RealTek>'
+sendln 'dbgmsg 3'
+wait '<RealTek>'
+sendln 'ri 0 1 1'
+wait '<RealTek>'
+dispstr #$1B"[2J" #$1B"[H"
+sendln ''
+wait '<RealTek>'
+sendln 'xmrx 80000000'
+messagebox 'Please choose corresponding bootloader (rtkboot_XXXXXX.bin)' 'Bootloader'
+filenamebox 'Choose bootloader' 0
+strsplit inputstr '_'
+strsplit groupmatchstr1 '.'
+str2int blspeed groupmatchstr1
+xmodemsend inputstr 1
+strscan inputstr 'rtkboot_'
+strremove inputstr 1 result+7
+strsplit inputstr '.'
+str2int blspeed groupmatchstr1
+wait '<RealTek>'
+sendln 'j 80000000'
+wait ''
+setspeed blspeed
+while 1
+  clearscreen  1
+  wait '<RealTek>'
+  dispstr #$1B"[2J" #$1B"[H"
+  sendln ''
+  wait '<RealTek>'
+  sendln 'xmod a0a00000'
+  messagebox 'Please choose corresponding firmware( mgl03_xxxxxxxxx.uart )' 'Firmware'
+  filenamebox 'Choose firmware' 0
+  fw_file=inputstr
+  fileopen fhandle fw_file 0 1
+  fileread fhandle 2 str
+  str2code val str
+  sprintf '%x' val
+  strcompare inputstr '7c91'
+  if result then
+    messagebox 'Wrong firmware file header!' 'Error'
+    fileclose fhandle
+    end
+  else
+    ;getting kernel size
+    fileseek fhandle 10 0
+    fileread fhandle 4 str
+    str2code val str
+    if val == 0 then
+      fileseek fhandle 11 0
+      fileread fhandle 3 str
+      str2code val str
+    endif
+    kernsize=val
+    sprintf '%x' kernsize
+    kernsize_hex=inputstr
+    ;getting rootfs size
+    fileseek fhandle 24 0
+    fileread fhandle 4 str
+    str2code val str
+    if val == 0 then
+      fileseek fhandle 25 0
+      fileread fhandle 3 str
+      str2code val str
+    endif
+    rootsize=val
+    sprintf '%x' rootsize
+    rootsize_hex=inputstr
+  endif
+  fileclose fhandle
+  ;rootoffset
+  rootoffset=2694840320+54+kernsize
+  sprintf '%x' rootoffset
+  rootoffset_hex=inputstr
+  xmodemsend fw_file 1
+  if result=1 then
+    sendln ''
+    wait '<RealTek>'
+    ;write boot_info
+    sendln 'nandw a0000 a0a00000 36'
+    wait '-->'
+    sendln 'y'
+    wait '<RealTek>'
+    ;write kernel
+    sendln 'nandw 200000 a0a00036 ' kernsize_hex
+    wait '-->'
+    sendln 'y'
+    mpause 50
+    dispstr #$1B"[1E" '=== Flashing kernel, please wait===' #$1B"[1E"
+    wait '<RealTek>'
+    ;write rootfs
+    sendln 'nandw 500000 ' rootoffset_hex ' ' rootsize_hex
+    wait '-->'
+    sendln 'y'
+    mpause 50
+    dispstr #$1B"[1E" '=== Flashing rootfs, please wait ===' #$1B"[1E" 
+    wait '<RealTek>'
+    messagebox 'Gateway flash complete, it will be rebooted!' 'Done'
+    sendln 'reboot'
+    setspeed 38400
+    enablekeyb 1
+    setsync 0    
+    yesnobox 'If you like my work please consider small donation :)' 'Thank you!'
+    if result exec 'rundll32 url.dll,FileProtocolHandler https://paypal.me/serrj'
+    end
+  else
+    messagebox 'Firmware upload failed, try again or choose slower bootloader speed!' 'Fail!'
+    sendln
+  endif
+endwhile
