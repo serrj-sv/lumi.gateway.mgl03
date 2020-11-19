@@ -1,4 +1,4 @@
-## This instruction will help you to flash latest firmware 1.4.7 with telnet enabled with minimal effort.
+## Flash firmware to Xiaomi Gateway v3 via UART with minimal effort.
 * No need to decode password
 * No need to "swap slots"
 * No need to touch TP16/TP17 points
