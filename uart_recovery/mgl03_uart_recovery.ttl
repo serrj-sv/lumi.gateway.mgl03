@@ -106,19 +106,19 @@ while 1
     wait '<RealTek>'
     ;write boot_info
     sendln 'nandw a0000 a0a00000 36'
-    wait '-->'
+    wait '(Y)es, (N)o->'
     sendln 'y'
     wait '<RealTek>'
     ;write kernel
     sendln 'nandw 200000 a0a00036 ' kernsize_hex
-    wait '-->'
+    wait '(Y)es, (N)o->'
     sendln 'y'
     mpause 50
     dispstr #$1B"[1E" '=== Flashing kernel, please wait===' #$1B"[1E"
     wait '<RealTek>'
     ;write rootfs
     sendln 'nandw 500000 ' rootoffset_hex ' ' rootsize_hex
-    wait '-->'
+    wait '(Y)es, (N)o->'
     sendln 'y'
     mpause 50
     dispstr #$1B"[1E" '=== Flashing rootfs, please wait ===' #$1B"[1E" 
