@@ -1,18 +1,25 @@
-;setsync 0
+;ver='v201120_01'
+setsync 0
 show -1
 enablekeyb 0
 setspeed 38400
 yesnobox 'Whould you like to try automatic bootloader interrupt?\n                (choose "No" if it fails for you)' 'Bootloader' 1
 if result then
   messagebox '1. Connect Gateway to UART\n2. Disconnect Gateway from power\n3. Press OK' 'Start' 1
+  showtt -1
+  showtt 1
+  mpause 100
   dispstr #$1B"[2J" #$1B"[H"
   dispstr '==Power ON Gateway NOW!==' 
-  dispstr #$1B"[1E" 
-  wait 'uart ok'
+  dispstr #$1B"[1E"
+  wait 'uart ok'  
   send 'u'
   wait '<RealTek>' 'init IP ok'
 else
   messagebox '1. Connect Gateway to UART\n2. Disconnect Gateway from power\n3. Press OK' 'Start' 1
+  showtt -1
+  showtt 1
+  mpause 100
   dispstr #$1B"[2J" #$1B"[H"
   dispstr '==Pree and hold "u" on keyboard and power ON Gateway=='
   dispstr #$1B"[1E"
@@ -25,7 +32,7 @@ if result=2 then
  messagebox 'Enter bootloader failed! Switch OFF gateway and run this macro again' 'Fail'
  end
 endif
-;setsync 1
+setsync 1
 sendln ''
 wait '<RealTek>'
 sendln 'dbgmsg 3'
