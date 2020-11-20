@@ -1,4 +1,4 @@
-;ver='v201120_01'
+ver='201120_01'
 setsync 0
 show -1
 enablekeyb 0
@@ -10,8 +10,10 @@ if result then
   showtt 1
   mpause 100
   dispstr #$1B"[2J" #$1B"[H"
-  dispstr '==Power ON Gateway NOW!==' 
-  dispstr #$1B"[1E"
+  dispstr '==MGL03 UART Recovery v' ver '==' 10 10 13
+;  dispstr #$1B"[1E"
+  dispstr '   >>Power ON Gateway NOW!<<' 10 10 13
+;  dispstr #$1B"[1E" 
   wait 'uart ok'  
   send 'u'
   wait '<RealTek>' 'init IP ok'
@@ -21,8 +23,10 @@ else
   showtt 1
   mpause 100
   dispstr #$1B"[2J" #$1B"[H"
-  dispstr '==Pree and hold "u" on keyboard and power ON Gateway=='
-  dispstr #$1B"[1E"
+  dispstr '          ==MGL03 UART Recovery v' ver '==' 10 10 13
+ ; dispstr #$1B"[1E"
+  dispstr '>>Press and hold "u" on keyboard and power ON Gateway<<' 10 10 13
+ ; dispstr #$1B"[1E"
   enablekeyb 1
   wait '<RealTek>' 'init IP ok'
   enablekeyb 0
