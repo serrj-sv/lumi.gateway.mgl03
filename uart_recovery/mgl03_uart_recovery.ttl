@@ -144,7 +144,7 @@ while 1
     if result then
       strdim paym 2
       paym[0] = 'PayPal (EUR, USD)'
-      paym[1] = 'Приват24 (РУБ, ГРН)'
+      paym[1] = 'Privat24 (RUB, UAH)'
       listbox 'Select your preferred payment method' 'Donation' paym
         if result == 0 then
           exec 'rundll32 url.dll,FileProtocolHandler https://paypal.me/serrj'
