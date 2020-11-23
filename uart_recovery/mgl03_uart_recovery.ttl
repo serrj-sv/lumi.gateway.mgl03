@@ -1,4 +1,4 @@
-ver='201120_01'
+ver='231120_01'
 setsync 0
 show -1
 enablekeyb 0
@@ -11,11 +11,14 @@ if result then
   mpause 100
   dispstr #$1B"[2J" #$1B"[H"
   dispstr '==MGL03 UART Recovery v' ver '==' 10 10 13
-;  dispstr #$1B"[1E"
   dispstr '   >>Power ON Gateway NOW!<<' 10 10 13
-;  dispstr #$1B"[1E" 
-  wait 'uart ok'  
+  mtimeout=1
+  while 1
+    wait 'uart ok'
+	if result break
+  endwhile
   send 'u'
+  mtimeout=0
   wait '<RealTek>' 'init IP ok'
 else
   messagebox '1. Connect Gateway to UART\n2. Disconnect Gateway from power\n3. Press OK' 'Start' 1
@@ -24,9 +27,7 @@ else
   mpause 100
   dispstr #$1B"[2J" #$1B"[H"
   dispstr '          ==MGL03 UART Recovery v' ver '==' 10 10 13
- ; dispstr #$1B"[1E"
   dispstr '>>Press and hold "u" on keyboard and power ON Gateway<<' 10 10 13
- ; dispstr #$1B"[1E"
   enablekeyb 1
   wait '<RealTek>' 'init IP ok'
   enablekeyb 0
