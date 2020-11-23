@@ -140,8 +140,18 @@ while 1
     setspeed 38400
     enablekeyb 1
     setsync 0    
-    yesnobox 'If you like my work please consider small donation :)' 'Thank you!'
-    if result exec 'rundll32 url.dll,FileProtocolHandler https://paypal.me/serrj'
+    yesnobox 'If you like my work please consider small donation for further development:)' 'Thank you!'
+    if result then
+      strdim paym 2
+      paym[0] = 'PayPal (EUR, USD)'
+      paym[1] = 'Приват24 (РУБ, ГРН)'
+      listbox 'Select your preferred payment method' 'Donation' paym
+        if result == 0 then
+          exec 'rundll32 url.dll,FileProtocolHandler https://paypal.me/serrj'
+        elseif result == 1 then
+          exec 'rundll32 url.dll,FileProtocolHandler https://www.liqpay.ua/ru/checkout/card/serrj'
+        endif  
+    endif  
     end
   else
     messagebox 'Firmware upload failed, try again or choose slower bootloader speed!' 'Fail!'
