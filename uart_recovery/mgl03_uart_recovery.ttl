@@ -15,7 +15,7 @@ if result then
   mtimeout=1
   while 1
     wait 'uart ok'
-	if result break
+    if result break
   endwhile
   send 'u'
   mtimeout=0
