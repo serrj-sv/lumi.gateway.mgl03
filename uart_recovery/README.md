@@ -9,9 +9,16 @@
 
    <img src=https://user-images.githubusercontent.com/511909/98269111-6da8b980-1f9e-11eb-82ef-d435a900edf1.jpg>
 
-1. connect UART:
+1. connect UART:  
+   UART Tx <--> Gateway Rx  
+   UART Rx <--> Gateway Tx  
+   UART GND <--> Gateway GND  
 
    <img src="https://user-images.githubusercontent.com/511909/98268507-a8f6b880-1f9d-11eb-80f6-3ae2bee27c5e.png" width="640">
+   
+   If you damaged UART pins there is backup UART on the back side of the board:
+   
+   <img src="https://raw.githubusercontent.com/serrj-sv/lumi.gateway.mgl03/main/media/mgl03_back_uart_eth.jpg" width="640">
 
     Important notes on UART:
     * UART adapter MUST be in 3.3V mode. The Gateway board is 5v intolerant.
