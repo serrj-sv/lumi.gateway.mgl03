@@ -35,7 +35,7 @@ int chksum_gen(char * buffer) {
     uint8_t  i;
     uint32_t crc=0;
 
-    for (i=6 ; i <= 48 ; i++) {
+    for (i=6 ; i <= 52 ; i++) {
     	crc=crc+((uint8_t)buffer[i] << 8) + (uint8_t)buffer[i+1];
     	i++;
     };
