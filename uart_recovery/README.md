@@ -10,8 +10,8 @@
    <img src=https://user-images.githubusercontent.com/511909/98269111-6da8b980-1f9e-11eb-82ef-d435a900edf1.jpg>
 
 1. connect UART:  
-   UART Tx  <--> TP4 
-   UART Rx  <--> TP11 
+   UART Tx  <--> TP4  
+   UART Rx  <--> TP11  
    UART GND <--> TP8  
 
    <img src="https://user-images.githubusercontent.com/511909/98268507-a8f6b880-1f9d-11eb-80f6-3ae2bee27c5e.png" width="640">
