@@ -11,7 +11,7 @@
 
 1. connect UART:  
    UART Tx  <--> TP4 (Gateway Rx)  
-   UART Rx  <--> TP11 (Gateway Tx) 
+   UART Rx  <--> TP11 (Gateway Tx)  
    UART GND <--> TP8  (Gateway GND)
 
    <img src="https://user-images.githubusercontent.com/511909/98268507-a8f6b880-1f9d-11eb-80f6-3ae2bee27c5e.png" width="640">
