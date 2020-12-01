@@ -8,7 +8,7 @@ puts "  stty (package coreutils)"
 set timeout -1
 match_max 100000
 
-set paypal_url https://paypal.me/serrj
+set coffee_url "https://buymeacoff.ee/serrj"
 
 puts "\n\nConnect Gateway to UART, disconnect it from power\n"
 
@@ -185,13 +185,13 @@ puts "=== Flashing rootfs, please wait! ==="
 expect "<RealTek>"
 
 send "reboot\r"
-close $tty_id
+close $console
 
 puts "\nGateway flash complete, device is rebooting now!"
 
-send_user "\nIf you like my work please consider small donation :)\nOpen url $paypal_url (y/N): "
+send_user "\nIf this project helped you, you can treat me with a cup of coffee :)\nOpen url $coffee_url (y/N): "
 expect_user -re "(.*)\n"
 set test $expect_out(1,string)
 if {$test == "y"} {
-	exec xdg-open $paypal_url
+	exec xdg-open $coffee_url
 }
