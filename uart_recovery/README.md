@@ -49,7 +49,7 @@
 1. Download [mgl03_uart_recovery.expect](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/mgl03_uart_recovery.expect)
 1. make sure following programs are installed:
   * expect
-  * sx
+  * sx (from package lrzsz)
   * stty
 1. make sure that bootloader (rtkboot_xxxx.bin), firmware (mgl03_xxxxxx.uart) and mgl03_uart_recovery.expect are in the same folder
 1. make sure you're in "dialout" group
