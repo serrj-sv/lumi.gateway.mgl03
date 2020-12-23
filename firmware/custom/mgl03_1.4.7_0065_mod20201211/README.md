@@ -1,4 +1,4 @@
-* Based on official 1.4.7_0065, built by [@zvldz](https://github.com/zvldz)
+* Based on official 1.4.7_0065, modded by [@zvldz](https://github.com/zvldz)
 * List of modifications:
   * enabled 'telnetd'
   * disabled gen password
