@@ -28,10 +28,10 @@
 
 ### Files
 1. Download intermediate bootloader from [bootloader](https://github.com/serrj-sv/lumi.gateway.mgl03/tree/main/uart_recovery/bootloader) folder with speed of your choice: 
-    * [rtkboot_38400.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_115200.bin) is slowest one and MOST reliable (upload firmware will take a bit more that 1 hour).
+    * [rtkboot_38400.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_38400.bin) is slowest one and MOST reliable (upload firmware will take a bit more that 1 hour).
     * [rtkboot_57600.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_57600.bin) is a bit faster then rtkboot_38400.bin
     * [**rtkboot_115200.bin**](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_115200.bin) (recommended) is the best compromise between speed and reliability (upload firmware will take around 20 min).
-    * [rtkboot_23400.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_57600.bin) is a bit faster then rtkboot_115200.bin
+    * [rtkboot_234000.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_234000.bin) is a bit faster then rtkboot_115200.bin
     * [rtkboot_460800.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_460800.bin) is fastest one (upload firmware will take around 6 min). 
 1. Download mgl03_xxxxx.uart file from [firmware folder](https://github.com/serrj-sv/lumi.gateway.mgl03/tree/main/firmware) of your choice.
 
