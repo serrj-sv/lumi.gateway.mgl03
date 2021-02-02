@@ -16,14 +16,12 @@ curl -s -k -L -o /tmp/update.sh https://gist.github.com/zvldz/b40b4873e3c4c1a64a
 You will need to select firmware version.
 
 If you are using the [XiaomiGateway3](https://github.com/AlexxIT/XiaomiGateway3) component.
-For recommended firmware, see [https://github.com/AlexxIT/XiaomiGateway3](https://github.com/AlexxIT/XiaomiGateway3).
+For recommended firmware, see [https://github.com/AlexxIT/XiaomiGateway3/wiki](https://github.com/AlexxIT/XiaomiGateway3/wiki).
 
 <img src="https://gist.githubusercontent.com/zvldz/b40b4873e3c4c1a64ac536e8ce5dbdad/raw/screenshot_telnet_script.png" width="768">
 
 If you see something like in screenshot, all is ok - you have updated gateway.
 If you used putty, window will close after rebooting gateway. Make sure there are no errors.
-After first reboot, gateway will reboot again to update ble firmware.
-If you want to make sure if ble firmware has been updated, check for /data/firmware/full.gbl file, it should not exist.
 
 You don't need to read any more.
 
@@ -81,6 +79,11 @@ reboot
 
 After first reboot, gateway will reboot again to update ble firmware.
 If you want to make sure if ble firmware has been updated, check for /data/firmware/full.gbl file, it should not exist.
+If not, you can update the BLE firmware manually.
+```sh 
+run_ble_dfu.sh /dev/ttyS1 /data/firmware/full.gbl 123 1
+``` 
+
 All copied files will be deleted automatically.
 
-
+In case of major changes between versions of updated firmware, you will most likely need to reset gateway.
