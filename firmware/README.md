@@ -16,7 +16,7 @@ curl -s -k -L -o /tmp/update.sh https://gist.github.com/zvldz/b40b4873e3c4c1a64a
 You will need to select firmware version.
 
 If you are using the [XiaomiGateway3](https://github.com/AlexxIT/XiaomiGateway3) component.
-For recommended firmware, see [https://github.com/AlexxIT/XiaomiGateway3](https://github.com/AlexxIT/XiaomiGateway3).
+For recommended firmware, see [https://github.com/AlexxIT/XiaomiGateway3/wiki](https://github.com/AlexxIT/XiaomiGateway3/wiki).
 
 <img src="https://gist.githubusercontent.com/zvldz/b40b4873e3c4c1a64ac536e8ce5dbdad/raw/screenshot_telnet_script.png" width="768">
 
