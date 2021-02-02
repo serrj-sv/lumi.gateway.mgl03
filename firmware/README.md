@@ -22,8 +22,6 @@ For recommended firmware, see [https://github.com/AlexxIT/XiaomiGateway3](https:
 
 If you see something like in screenshot, all is ok - you have updated gateway.
 If you used putty, window will close after rebooting gateway. Make sure there are no errors.
-After first reboot, gateway will reboot again to update ble firmware.
-If you want to make sure if ble firmware has been updated, check for /data/firmware/full.gbl file, it should not exist.
 
 You don't need to read any more.
 
@@ -81,6 +79,11 @@ reboot
 
 After first reboot, gateway will reboot again to update ble firmware.
 If you want to make sure if ble firmware has been updated, check for /data/firmware/full.gbl file, it should not exist.
+If not, you can update the BLE firmware manually.
+```sh 
+run_ble_dfu.sh /dev/ttyS1 /data/firmware/full.gbl 123 1
+``` 
+
 All copied files will be deleted automatically.
 
-
+In case of major changes between versions of updated firmware, you will most likely need to reset gateway.
