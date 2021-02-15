@@ -60,3 +60,16 @@
    ```
  1. follow on-screen instructions
  1. Perform Factory Reset: after Gateway fully booted click on it's button 10 times repeatedly.
+ 
+ ### Troubleshooting
+ #### If something goes wrong, check following:
+1. Always clean sordering area with alcohol. Dirt and flux remains may cause short-circuit (see: [issue 87](https://github.com/AlexxIT/XiaomiGateway3/issues/87#issuecomment-754325553))
+1. Make sure you did't mix UART connection, the only proper way is Tx to Rx and vice versa (NOT Tx to Tx and Rx to Rx): (see [issue 18](https://github.com/serrj-sv/lumi.gateway.mgl03/issues/18)):
+   ```
+   UART Tx  -> MGL03 Rx
+   UART Rx  -> MGL03 Tx
+   UART GND -> MGL03 GND
+   ```
+1. Make sure you know how to download files on GitHub (see [issue 1](https://github.com/serrj-sv/lumi.gateway.mgl03/issues/1)):
+   1. Do NOT do "right-click and 'save as'" on filename, instead:
+   1. First click on file you want to download and then click on "Download" button
