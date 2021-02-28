@@ -1,0 +1,200 @@
+#!/usr/bin/expect -f
+
+puts "Xiaomi Gateway 3 flashing script"
+puts "Requires:"
+puts "  sx (package lrzsz)"
+puts "  stty (package coreutils)"
+
+set timeout -1
+match_max 100000
+
+set coffee_url "https://buymeacoff.ee/serrj"
+
+puts "\n\nConnect Gateway to UART, disconnect it from power\n"
+
+set files [glob -directory [pwd] -tails rtkboot*.bin]
+puts "Available bootloaders:"
+set idx 0
+array set bootloaders {}
+foreach x $files {
+    set bl [open $x r]
+    fconfigure $bl -translation binary
+    seek $bl 0
+    set hdr [read $bl 2]
+    binary scan $hdr H* bl_hdr
+    close $bl
+
+    if {$bl_hdr == "0201"} {
+      puts "\[$idx\] $x"
+      append bootloaders($idx) $x
+      incr idx
+    }
+}
+set idx 0
+send_user "Choose bootloader ($idx): "
+expect_user -re "(.*)\n"
+set test $expect_out(1,string)
+if {$test != ""} {
+	set idx $test
+}
+set bootloader_file $bootloaders($idx)
+puts "Using bootloader from: $bootloader_file"
+regexp {rtkboot_(\d+).bin} $bootloader_file -> bootloader_speed
+puts "Selected bootloader speed: $bootloader_speed\n"
+
+
+set files [glob -directory [pwd] -tails mgl03*.uart]
+puts "Available firmwares:"
+set idx 0
+array set firmwares {}
+foreach x $files {
+    set fw [open $x r]
+    fconfigure $fw -translation binary
+    seek $fw 0
+    set hdr [read $fw 2]
+    binary scan $hdr H* fw_hdr
+    close $fw
+
+    if {$fw_hdr == "7c91"} {
+      puts "\[$idx\] $x"
+      append firmwares($idx) $x
+      incr idx
+    }
+}
+set idx 0
+send_user "Choose firmware ($idx): "
+expect_user -re "(.*)\n"
+set test $expect_out(1,string)
+if {$test != ""} {
+	set idx $test
+}
+set firmware_file $firmwares($idx)
+puts "Using firmware from: $firmware_file\n"
+
+
+set fw [open $firmware_file r]
+fconfigure $fw -translation binary
+
+seek $fw 11
+set ks [read $fw 3]
+binary scan $ks H* kernel_size
+
+seek $fw 32
+set rs [read $fw 3]
+binary scan $rs H* rootfs_size
+
+close $fw
+
+send_user "\nkernel size: $kernel_size\n"
+send_user "rootfs size: $rootfs_size\n"
+
+set temp [expr {0xa0a00036 + "0x${kernel_size}"}]
+set rootfs_offset [format 0x%x $temp]
+set rootfs_offset [string range $rootfs_offset 2 10]
+send_user "rootfs offset: $rootfs_offset\n"
+
+
+# serial connection
+
+#set tty_dev /dev/ttyUSB0
+#set tty_dev /dev/tty.usbserial-0001
+set tty_dev /dev/cu.usbserial-0001
+send_user "\nEnter serial device name ($tty_dev): "
+expect_user -re "(.*)\n"
+set test $expect_out(1,string)
+if {$test != ""} {
+	set tty_dev $test
+}
+
+puts "Connecting to $tty_dev\n"
+set tty_id [open $tty_dev r+]
+
+puts "Set $tty_dev port parameters\n"
+# serial port parameters
+exec stty -f $tty_dev 38400 raw -ixon -crtscts -echo -istrip -hup
+
+# connect
+spawn -open $tty_id
+set console $spawn_id
+
+puts "\nPower ON Gateway NOW!"
+
+expect {
+	"uart ok" {
+		send -- "u"
+	}
+	"Enter ROM console" {
+		puts "Connected to correct bootloader!"
+	}
+	"load img ok" {
+		puts "Connected to wrong bootloader!"
+		exit
+	}
+	timeout {
+		puts "Tiemout!"
+		exit
+	}
+}
+expect "<RealTek>"
+set timeout -1
+send "dbgmsg 3\r"
+expect "<RealTek>"
+send "ri 0 1 1\r"
+expect "<RealTek>"
+puts ""
+
+
+spawn sh -c "lsx -vv -X -b $bootloader_file < $tty_dev > $tty_dev"
+set xmodem $spawn_id
+expect -i $xmodem "Give your local XMODEM receive command now"
+send -i $console "xmrx 80000000\r"
+expect -i $xmodem "Transfer complete"
+set spawn_id $console
+
+send "\r"
+expect "<RealTek>"
+
+send "j 80000000\r"
+expect "Jump to 0x80000000"
+exec stty -f $tty_dev $bootloader_speed
+expect "<RealTek>"
+
+spawn sh -c "lsx -vv -X -b $firmware_file < $tty_dev > $tty_dev"
+set xmodem $spawn_id
+expect -i $xmodem "Give your local XMODEM receive command now"
+send -i $console "xmod a0a00000\r"
+expect -i $xmodem "Transfer complete"
+set spawn_id $console
+
+send "\r"
+expect "<RealTek>"
+
+send "nandw a0000 a0a00000 36\r"
+expect "(Y)es, (N)o"
+send "y\r"
+puts "\n=== Flashing boot_info, please wait! ==="
+expect "<RealTek>"
+
+send "nandw 200000 a0a00036 $kernel_size\r"
+expect "(Y)es, (N)o"
+send "y\r"
+puts "\n=== Flashing kernel, please wait! ==="
+expect "<RealTek>"
+
+send "nandw 500000 $rootfs_offset $rootfs_size\r"
+expect "(Y)es, (N)o"
+send "y\r"
+puts "=== Flashing rootfs, please wait! ==="
+expect "<RealTek>"
+
+send "reboot\r"
+close $console
+
+puts "\nGateway flash complete, device is rebooting now!"
+
+send_user "\nIf this project helped you, you can treat me with a cup of coffee :)\nOpen url $coffee_url (y/N): "
+expect_user -re "(.*)\n"
+set test $expect_out(1,string)
+if {$test == "y"} {
+	exec xdg-open $coffee_url
+}
