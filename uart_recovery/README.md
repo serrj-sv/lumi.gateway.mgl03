@@ -1,8 +1,6 @@
 ## Flash firmware to Xiaomi Gateway v3 via UART.
-* No need to decode password
-* No need to "swap slots"
-* No need to touch TP16/TP17 points
-* Requires minimum soldering skills (no-solder options available, see "Hardware")
+If you just need to open telnet on stock firmware, use "software" method:
+https://gist.github.com/zvldz/1bd6b21539f84339c218f9427e022709
 
 ### Hardware
 1. Pry open gateway:
@@ -33,7 +31,7 @@
     * [**rtkboot_115200.bin**](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_115200.bin) (recommended) is the best compromise between speed and reliability (upload firmware will take around 20 min).
     * [rtkboot_230400.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_230400.bin) is a bit faster then rtkboot_115200.bin
     * [rtkboot_460800.bin](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/bootloader/rtkboot_460800.bin) is fastest one (upload firmware will take around 6 min). 
-1. Download mgl03_xxxxx.uart file from [firmware folder](https://github.com/serrj-sv/lumi.gateway.mgl03/tree/main/firmware) of your choice.
+1. Download mgl03_xxxxx.uart file from [firmware folder](https://github.com/zvldz/mgl03_fw/tree/main/firmware) of your choice.
 
 ### Windows
 1. Download [mgl03_uart_recovery.ttl](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/mgl03_uart_recovery.ttl)
