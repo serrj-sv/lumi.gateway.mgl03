@@ -59,6 +59,22 @@ https://gist.github.com/zvldz/1bd6b21539f84339c218f9427e022709
  1. follow on-screen instructions
  1. Perform Factory Reset: after Gateway fully booted click on it's button 10 times repeatedly.
  
+### Mac OS X
+1. Download [mgl03_uart_recovery-osx.expect](https://github.com/serrj-sv/lumi.gateway.mgl03/raw/main/uart_recovery/mgl03_uart_recovery-osx.expect)
+1. make sure following programs are installed:
+  * expect
+  * lsx (from package lrzsz, brew install lrzsz)
+  * stty
+1. make sure that bootloader (rtkboot_xxxx.bin), firmware (mgl03_xxxxxx.uart) and mgl03_uart_recovery.expect are in the same folder
+1. make sure you're in "dialout" group
+1. run:
+   ```
+   chmod +x mgl03_uart_recovery.expect
+   ./mgl03_uart_recovery-osx.expect
+   ```
+ 1. follow on-screen instructions
+ 1. Perform Factory Reset: after Gateway fully booted click on it's button 10 times repeatedly.
+ 
  ### Troubleshooting
  #### If something goes wrong, check following:
 1. Always clean sordering area with alcohol. Dirt and flux remains may cause short-circuit (see: [issue 87](https://github.com/AlexxIT/XiaomiGateway3/issues/87#issuecomment-754325553))
